@@ -1,9 +1,10 @@
 package org.hm.main;
 
 import org.hm.Graph;
-import org.hm.NeighborhoodSearch;
 import org.hm.PlaneGraph;
 import org.hm.Points;
+import org.hm.backtracking.Backtracking;
+import org.hm.neighborhoodSearch.NeighborhoodSearch;
 import org.hm.simulatedAnnealing.ISimulatedAnnealing;
 import org.hm.simulatedAnnealing.SimulatedAnnealing;
 
@@ -11,30 +12,43 @@ import org.hm.simulatedAnnealing.SimulatedAnnealing;
 public class TravellingSalesman {
 	public static void main(String[] args) {
 		int noPoints = 8;
-		
-		System.out.println(neighborhoodSearch(noPoints));
-		
-		simmulatedAnnealing(noPoints);
+
+		simulate(noPoints, true);
 		
 		noPoints = 10;
-		
-		System.out.println(neighborhoodSearch(noPoints));
-		
-		simmulatedAnnealing(noPoints);
-		
+
+		simulate(noPoints, true);
+
 		noPoints = 50;
-		
-		System.out.println(neighborhoodSearch(noPoints));
-		
+
+		simulate(noPoints, false);
+
 		noPoints = 100;
-		
-		System.out.println(neighborhoodSearch(noPoints));
+
+		simulate(noPoints, false);
 	}
-	
-	private static void backtracking(int numberOfNodes) {
-		Points p = readPoints(numberOfNodes);
+
+	private static void simulate(int noPoints, boolean backtrack){
+		System.out.println("No points:"+noPoints);
+
+		if (backtrack)
+			System.out.println("Backtracking:"+backtracking(noPoints));
+
+		System.out.println("Neighborhood search:"+neighborhoodSearch(noPoints));
+
+		simmulatedAnnealing(noPoints);
+
+		System.out.println("---------------------");
 	}
-	
+
+	private static double backtracking(int numberOfNodes) {
+		Points points = readPoints(numberOfNodes);
+		Graph theGraph = new PlaneGraph(points);
+		Backtracking backtracking = new Backtracking(theGraph);
+		backtracking.backtrack();
+		return backtracking.getShortestPath();
+	}
+
 	private static double neighborhoodSearch(int numberOfNodes) {
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
@@ -42,19 +56,19 @@ public class TravellingSalesman {
 		neighborhoodSearch.findPath();
 		return neighborhoodSearch.length();
 	}
-	
+
 	private static void simmulatedAnnealing(int numberOfNodes) {
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
 		ISimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.99, numberOfNodes, theGraph);
 		simulatedAnnealing.findPath();
 	}
-	
+
 	private static void tabusearch(int numberOfNodes) {
 		Points p = readPoints(numberOfNodes);
 	}
-	
-	
+
+
 	private static Points readPoints(int numberOfNodes) {
 		Points p = new Points(numberOfNodes, "input"+numberOfNodes+".txt");
 		return p;

@@ -85,8 +85,7 @@ public class SimulateAnnealing {
 		minimallength = pathlength;
 
 		while (sameCount<50) {
-			// update the screen
-			System.out.println("Cycle=" + cycle + ",Length=" + minimallength + ",Temp=" + temperature );
+			//System.out.println("Cycle=" + cycle + ",Length=" + minimallength + ",Temp=" + temperature );
 
 			// make adjustments to city order(annealing)
 			for (int j2 = 0; j2 < owner.getCount() * owner.getCount(); j2++) {
