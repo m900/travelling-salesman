@@ -1,6 +1,8 @@
-package org.hm;
+package org.hm.neighborhoodSearch;
 
 import java.util.Random;
+
+import org.hm.Graph;
 
 public class NeighborhoodSearch{
 	private Graph g;
