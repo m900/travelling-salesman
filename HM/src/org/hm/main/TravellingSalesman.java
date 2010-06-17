@@ -39,7 +39,7 @@ public class TravellingSalesman {
 
 		simulate(noPoints, false);
 		System.out.println("annealing ");
-		simmulatedAnnealing(noPoints);
+		//simmulatedAnnealing(noPoints);
 		
 //		
 //		noPoints = 100;
