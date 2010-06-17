@@ -53,12 +53,6 @@ public class TravellingSalesman {
 		Graph theGraph = new PlaneGraph(points);
 		NeighborhoodSearch neighborhoodSearch = new NeighborhoodSearch(theGraph);
 		neighborhoodSearch.findPath();
-		int[] to = neighborhoodSearch.getTo();
-		for (int i=0;i<to.length ;i++) {
-			//	System.out.println(i+"->"+to[i]);
-				//System.out.print(theGraph.distance(i, to[i])+"\n");
-		}
-		System.out.println();
 		return neighborhoodSearch.length();
 	}
 
@@ -68,11 +62,6 @@ public class TravellingSalesman {
 		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.90, numberOfNodes, theGraph);
 		simulatedAnnealing.findPath();
 		int[] order = simulatedAnnealing.getMinimalOrder();
-		for (int i=0;i<order.length ;i++) {
-		//	System.out.println("order[i] "+order[i]);
-			//System.out.print(theGraph.distance(order[i],order[ (i+1)%order.length])+"\n");
-		}
-		System.out.println();
 		return simulatedAnnealing.getCount();
 	}
 
