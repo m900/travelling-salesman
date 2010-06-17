@@ -5,26 +5,16 @@ import org.hm.PlaneGraph;
 import org.hm.Points;
 import org.hm.backtracking.Backtracking;
 import org.hm.neighborhoodSearch.NeighborhoodSearch;
-import org.hm.simulatedAnnealing.ISimulatedAnnealing;
 import org.hm.simulatedAnnealing.SimulatedAnnealing;
 
 
 public class TravellingSalesman {
 	public static void main(String[] args) {
 		int noPoints = 8;
-		
-		//System.out.println("ns: "+neighborhoodSearch(noPoints));
-		
-	//	simmulatedAnnealing(noPoints);
 
 		simulate(noPoints, true);
 		
 		noPoints = 10;
-		
-		//System.out.println("ns"+neighborhoodSearch(noPoints));
-		
-		//simmulatedAnnealing(noPoints);
-		
 
 		simulate(noPoints, true);
 
@@ -33,19 +23,8 @@ public class TravellingSalesman {
 		simulate(noPoints, false);
 
 		noPoints = 100;
-		System.out.println("neighborhood ");
-		
-		System.out.println(neighborhoodSearch(noPoints));
 
 		simulate(noPoints, false);
-		System.out.println("annealing ");
-		//simmulatedAnnealing(noPoints);
-		
-//		
-//		noPoints = 100;
-//		
-//		System.out.println(neighborhoodSearch(noPoints));
-//		simmulatedAnnealing(noPoints);
 	}
 
 	private static void simulate(int noPoints, boolean backtrack){
