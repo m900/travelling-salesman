@@ -84,7 +84,7 @@ public class SimulateAnnealing {
 		pathlength = length();
 		minimallength = pathlength;
 
-		while (sameCount<50) {
+		while (sameCount<500) {
 			//System.out.println("Cycle=" + cycle + ",Length=" + minimallength + ",Temp=" + temperature );
 
 			// make adjustments to city order(annealing)
@@ -121,8 +121,7 @@ public class SimulateAnnealing {
 		}
 		
 		// we're done
-		System.out.println("Solution found after " + cycle + " cycles." );
-		System.out.println("Minimal length:"+minimallength);
+		System.out.println("Simulated anealing:"+minimallength);
 	}
 
 	/**

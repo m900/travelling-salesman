@@ -59,7 +59,7 @@ public class TravellingSalesman {
 	private static double simmulatedAnnealing(int numberOfNodes) {
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
-		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.90, numberOfNodes, theGraph);
+		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1500, 0.99, numberOfNodes, theGraph);
 		simulatedAnnealing.findPath();
 		int[] order = simulatedAnnealing.getMinimalOrder();
 		return simulatedAnnealing.getCount();
