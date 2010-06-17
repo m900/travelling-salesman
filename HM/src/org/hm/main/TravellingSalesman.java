@@ -12,10 +12,19 @@ import org.hm.simulatedAnnealing.SimulatedAnnealing;
 public class TravellingSalesman {
 	public static void main(String[] args) {
 		int noPoints = 8;
+		
+		//System.out.println("ns: "+neighborhoodSearch(noPoints));
+		
+	//	simmulatedAnnealing(noPoints);
 
 		simulate(noPoints, true);
 		
 		noPoints = 10;
+		
+		//System.out.println("ns"+neighborhoodSearch(noPoints));
+		
+		//simmulatedAnnealing(noPoints);
+		
 
 		simulate(noPoints, true);
 
@@ -24,8 +33,19 @@ public class TravellingSalesman {
 		simulate(noPoints, false);
 
 		noPoints = 100;
+		System.out.println("neighborhood ");
+		
+		System.out.println(neighborhoodSearch(noPoints));
 
 		simulate(noPoints, false);
+		System.out.println("annealing ");
+		simmulatedAnnealing(noPoints);
+		
+//		
+//		noPoints = 100;
+//		
+//		System.out.println(neighborhoodSearch(noPoints));
+//		simmulatedAnnealing(noPoints);
 	}
 
 	private static void simulate(int noPoints, boolean backtrack){
@@ -54,14 +74,27 @@ public class TravellingSalesman {
 		Graph theGraph = new PlaneGraph(points);
 		NeighborhoodSearch neighborhoodSearch = new NeighborhoodSearch(theGraph);
 		neighborhoodSearch.findPath();
+		int[] to = neighborhoodSearch.getTo();
+		for (int i=0;i<to.length ;i++) {
+			//	System.out.println(i+"->"+to[i]);
+				//System.out.print(theGraph.distance(i, to[i])+"\n");
+		}
+		System.out.println();
 		return neighborhoodSearch.length();
 	}
 
-	private static void simmulatedAnnealing(int numberOfNodes) {
+	private static double simmulatedAnnealing(int numberOfNodes) {
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
-		ISimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.99, numberOfNodes, theGraph);
+		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.90, numberOfNodes, theGraph);
 		simulatedAnnealing.findPath();
+		int[] order = simulatedAnnealing.getMinimalOrder();
+		for (int i=0;i<order.length ;i++) {
+		//	System.out.println("order[i] "+order[i]);
+			//System.out.print(theGraph.distance(order[i],order[ (i+1)%order.length])+"\n");
+		}
+		System.out.println();
+		return simulatedAnnealing.getCount();
 	}
 
 	private static void tabusearch(int numberOfNodes) {
