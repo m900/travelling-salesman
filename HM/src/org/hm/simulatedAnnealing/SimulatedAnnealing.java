@@ -1,5 +1,6 @@
 package org.hm.simulatedAnnealing;
 
+
 import org.hm.Graph;
 
 public class SimulatedAnnealing implements ISimulatedAnnealing{
@@ -76,6 +77,15 @@ public class SimulatedAnnealing implements ISimulatedAnnealing{
 	@Override
 	public int getCycles() {
 		return 0;
+	}
+
+	@Override
+	public int[] getOrder() {
+		return worker.getOrder();
+	}
+	
+	public int[] getMinimalOrder(){
+		return worker.getMinimalOrder();
 	}
 
 }
