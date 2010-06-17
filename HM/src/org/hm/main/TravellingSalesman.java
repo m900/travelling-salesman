@@ -31,9 +31,9 @@ public class TravellingSalesman {
 		System.out.println("No points:"+noPoints);
 
 		if (backtrack)
-			System.out.println("Backtracking:"+backtracking(noPoints));
+			System.out.println("Backtracking:        "+backtracking(noPoints));
 
-		System.out.println("Neighborhood search:"+neighborhoodSearch(noPoints));
+		System.out.println("Neighborhood search: "+neighborhoodSearch(noPoints));
 
 		simmulatedAnnealing(noPoints);
 

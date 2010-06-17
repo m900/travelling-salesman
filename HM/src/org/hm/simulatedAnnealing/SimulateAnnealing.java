@@ -121,7 +121,7 @@ public class SimulateAnnealing {
 		}
 		
 		// we're done
-		System.out.println("Simulated anealing:"+minimallength);
+		System.out.println("Simulated anealing:  "+minimallength);
 	}
 
 	/**
