@@ -152,4 +152,8 @@ public class SimulateAnnealing {
 	public int[] getOrder() {
 		return order;
 	}
+	
+	public int[] getMinimalOrder() {
+		return order;
+	}
 }
