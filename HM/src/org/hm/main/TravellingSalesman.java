@@ -30,8 +30,12 @@ public class TravellingSalesman {
 	private static void simulate(int noPoints, boolean backtrack){
 		System.out.println("No points:"+noPoints);
 
-		if (backtrack)
+		if (backtrack){
+			Profiler.enter("Backtracting for "+noPoints+" nodes");
 			System.out.println("Backtracking:        "+backtracking(noPoints));
+			Profiler.leave("Backtracting for "+noPoints+" nodes");
+			Profiler.print("Backtracting for "+noPoints+" nodes", "took:");
+		}
 
 		System.out.println("Neighborhood search: "+neighborhoodSearch(noPoints));
 
