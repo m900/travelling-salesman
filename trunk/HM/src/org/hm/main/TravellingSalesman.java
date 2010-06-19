@@ -6,6 +6,7 @@ import org.hm.Points;
 import org.hm.backtracking.Backtracking;
 import org.hm.neighborhoodSearch.NeighborhoodSearch;
 import org.hm.simulatedAnnealing.SimulatedAnnealing;
+import org.hm.tabuSearch.TabuSearch;
 
 
 public class TravellingSalesman {
@@ -50,6 +51,13 @@ public class TravellingSalesman {
 		Backtracking backtracking = new Backtracking(theGraph);
 		backtracking.backtrack();
 		return backtracking.getShortestPath();
+	}
+	private static double tabuSearch(int numberOfNodes) {
+		Points points = readPoints(numberOfNodes);
+		Graph theGraph = new PlaneGraph(points);
+		TabuSearch tabuSearch = new TabuSearch(theGraph);
+		System.out.println("tabu search de 10 "+tabuSearch.search(20));
+		return 0;
 	}
 
 	private static double neighborhoodSearch(int numberOfNodes) {
