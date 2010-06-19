@@ -1,5 +1,7 @@
 package org.hm.simulatedAnnealing;
 
+import org.hm.Graph;
+
 
 public interface ISimulatedAnnealing {
 	public int getCount();
@@ -9,4 +11,5 @@ public interface ISimulatedAnnealing {
 	public double getDelta();
 	public void findPath();
 	public int[] getOrder();
+	public Graph getGraph();
 }

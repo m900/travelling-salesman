@@ -88,4 +88,8 @@ public class SimulatedAnnealing implements ISimulatedAnnealing{
 		return worker.getMinimalOrder();
 	}
 
+	public Graph getGraph() {
+		return graph;
+	}
+
 }
