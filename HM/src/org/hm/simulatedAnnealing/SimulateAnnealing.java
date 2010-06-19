@@ -74,17 +74,18 @@ public class SimulateAnnealing {
 
 
 	public void findPath(){
+		try{
 		int cycle = 1;
 		int sameCount = 0;
 		temperature = owner.getStartingTemperature();
 
-		initorder(getOrder());
+		initorder(order);
 		initorder(minimalorder);
 
 		pathlength = length();
 		minimallength = pathlength;
 
-		while (sameCount<1500) {
+		while (sameCount<500) {
 			//System.out.println("Cycle=" + cycle + ",Length=" + minimallength + ",Temp=" + temperature );
 
 			// make adjustments to city order(annealing)
@@ -99,9 +100,9 @@ public class SimulateAnnealing {
 						j1 = k1;
 					}
 					for (; j1 > i1; j1--) {
-						int i2 = getOrder()[i1 + 1];
-						getOrder()[i1 + 1] = getOrder()[j1];
-						getOrder()[j1] = i2;
+						int i2 = order[i1 + 1];
+						order[i1 + 1] = order[j1];
+						order[j1] = i2;
 						i1++;
 					}
 				}
@@ -111,17 +112,21 @@ public class SimulateAnnealing {
 			pathlength = length();
 			if (pathlength < minimallength) {
 				minimallength = pathlength;
-				for (int k2 = 0; k2 < owner.getCount(); k2++)
-					minimalorder[k2] = getOrder()[k2];
+				for (int k2 = 0; k2 < owner.getCount(); k2++){
+					minimalorder[k2] = new Integer(order[k2]);
+				}
 				sameCount=0;
 			} else
 				sameCount++;
 			temperature = owner.getDelta() * temperature;
 			cycle++;
 		}
-		
 		// we're done
 		System.out.println("Simulated anealing:  "+minimallength);
+		}
+		catch (Throwable e){
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -132,8 +137,15 @@ public class SimulateAnnealing {
 	 */
 	public double length(){
 		double d = 0.0;
-		for (int i = 1; i <= owner.getCount(); i++)
-			d += owner.getError(i, i - 1);
+		for (int i = 1; i <= owner.getCount()-1; i++)
+			d += owner.getError(i, i-1);
+		return d;
+	}
+	
+	public double currentMinimalLength(){
+		double d = 0.0;
+		for (int i = 1; i <= owner.getCount()-1; i++)
+			d += owner.getGraph().distance(minimalorder[i], minimalorder[i - 1]);
 		return d;
 	}
 
@@ -153,6 +165,6 @@ public class SimulateAnnealing {
 	}
 	
 	public int[] getMinimalOrder() {
-		return order;
+		return minimalorder;
 	}
 }
