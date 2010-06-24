@@ -32,10 +32,10 @@ public class TravellingSalesman {
 		System.out.println("No points:"+noPoints);
 
 		if (backtrack){
-			System.out.println("Backtracking:        "+backtracking(noPoints));
+			backtracking(noPoints);
 		}
 
-		System.out.println("Neighborhood search: "+neighborhoodSearch(noPoints));
+		neighborhoodSearch(noPoints);
 
 		simmulatedAnnealing(noPoints);
 		
@@ -53,6 +53,7 @@ public class TravellingSalesman {
 		Profiler.leave("backtrack");
 		Profiler.print("backtrack", "took:");
 		Profiler.reset("backtrack");
+		System.out.println("Backtracking:        "+backtracking.getShortestPath());
 		return backtracking.getShortestPath();
 	}
 	private static double tabuSearch(int numberOfNodes) {
@@ -60,7 +61,7 @@ public class TravellingSalesman {
 		Graph theGraph = new PlaneGraph(points);
 		TabuSearch tabuSearch = new TabuSearch(theGraph);
 		Profiler.enter("tabuSearch");
-		System.out.println("tabu search de 10 "+tabuSearch.search(20));
+		System.out.println("Tabu Search   : "+tabuSearch.search(20));
 		Profiler.leave("tabuSearch");
 		Profiler.print("tabuSearch", "took:");
 		Profiler.reset("tabuSearch");
@@ -77,6 +78,7 @@ public class TravellingSalesman {
 		Profiler.leave("neighborhoodSearch");
 		Profiler.print("neighborhoodSearch", "took:");
 		Profiler.reset("neighborhoodSearch");
+		System.out.println("Neighborhood search: "+neighborhoodSearch.length());
 		return neighborhoodSearch.length();
 	}
 
