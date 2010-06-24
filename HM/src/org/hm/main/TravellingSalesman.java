@@ -32,55 +32,67 @@ public class TravellingSalesman {
 		System.out.println("No points:"+noPoints);
 
 		if (backtrack){
-			Profiler.enter("Backtracting for "+noPoints+" nodes");
 			System.out.println("Backtracking:        "+backtracking(noPoints));
-			Profiler.leave("Backtracting for "+noPoints+" nodes");
-			Profiler.print("Backtracting for "+noPoints+" nodes", "took:");
 		}
 
 		System.out.println("Neighborhood search: "+neighborhoodSearch(noPoints));
 
 		simmulatedAnnealing(noPoints);
+		
+		tabuSearch(noPoints);
 
 		System.out.println("---------------------");
 	}
 
 	private static double backtracking(int numberOfNodes) {
+		Profiler.enter("backtrack");
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
 		Backtracking backtracking = new Backtracking(theGraph);
 		backtracking.backtrack();
+		Profiler.leave("backtrack");
+		Profiler.print("backtrack", "took:");
+		Profiler.reset("backtrack");
 		return backtracking.getShortestPath();
 	}
 	private static double tabuSearch(int numberOfNodes) {
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
 		TabuSearch tabuSearch = new TabuSearch(theGraph);
+		Profiler.enter("tabuSearch");
 		System.out.println("tabu search de 10 "+tabuSearch.search(20));
+		Profiler.leave("tabuSearch");
+		Profiler.print("tabuSearch", "took:");
+		Profiler.reset("tabuSearch");
 		return 0;
 	}
 
 	private static double neighborhoodSearch(int numberOfNodes) {
+
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
 		NeighborhoodSearch neighborhoodSearch = new NeighborhoodSearch(theGraph);
+		Profiler.enter("neighborhoodSearch");
 		neighborhoodSearch.findPath();
+		Profiler.leave("neighborhoodSearch");
+		Profiler.print("neighborhoodSearch", "took:");
+		Profiler.reset("neighborhoodSearch");
 		return neighborhoodSearch.length();
 	}
 
 	private static double simmulatedAnnealing(int numberOfNodes) {
+		
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
 		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(15000, 0.99, numberOfNodes, theGraph);
+		Profiler.enter("simmulatedAnnealing");
 		simulatedAnnealing.findPath();
 		int[] order = simulatedAnnealing.getMinimalOrder();
+		Profiler.leave("simmulatedAnnealing");
+		Profiler.print("simmulatedAnnealing", "took:");
+		Profiler.reset("simmulatedAnnealing");
 		return simulatedAnnealing.getCount();
 	}
-
-	private static void tabusearch(int numberOfNodes) {
-		Points p = readPoints(numberOfNodes);
-	}
-
 
 	private static Points readPoints(int numberOfNodes) {
 		Points p = new Points(numberOfNodes, "input"+numberOfNodes+".txt");
