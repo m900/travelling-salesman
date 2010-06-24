@@ -73,7 +73,7 @@ public class SimulateAnnealing {
 	}
 
 
-	public void findPath(){
+	public double findPath(){
 		try{
 		int cycle = 1;
 		int sameCount = 0;
@@ -87,7 +87,6 @@ public class SimulateAnnealing {
 
 		while (sameCount<500) {
 			//System.out.println("Cycle=" + cycle + ",Length=" + minimallength + ",Temp=" + temperature );
-
 			// make adjustments to city order(annealing)
 			for (int j2 = 0; j2 < owner.getCount() * owner.getCount(); j2++) {
 				int i1 = (int)Math.floor((double)owner.getCount() * Math.random());
@@ -107,7 +106,6 @@ public class SimulateAnnealing {
 					}
 				}
 			}
-
 			// See if this improved anything
 			pathlength = length();
 			if (pathlength < minimallength) {
@@ -123,9 +121,11 @@ public class SimulateAnnealing {
 		}
 		// we're done
 		System.out.println("Simulated anealing:  "+minimallength);
+		return minimallength;
 		}
 		catch (Throwable e){
 			e.printStackTrace();
+			return minimallength;
 		}
 	}
 
