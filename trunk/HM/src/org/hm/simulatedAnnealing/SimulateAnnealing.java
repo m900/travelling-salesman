@@ -120,7 +120,7 @@ public class SimulateAnnealing {
 			cycle++;
 		}
 		// we're done
-		System.out.println("Simulated anealing:  "+minimallength);
+		//System.out.println("Simulated anealing:  "+minimallength);
 		return minimallength;
 		}
 		catch (Throwable e){
