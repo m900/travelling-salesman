@@ -10,21 +10,24 @@ import org.hm.Graph;
 
 public class TabuSearch {
 
-	private static int TABUTENURE = 0;
+	private int tenure = 0;
 	private Graph graph;
 	private Queue<Integer> tabuI = new ConcurrentLinkedQueue<Integer>();
 	private Queue<Integer> tabuJ = new ConcurrentLinkedQueue<Integer>();
 	private ArrayList<Integer> currentSolution = new ArrayList<Integer>();
-	private ArrayList<Integer> bestSolution = new ArrayList<Integer>();
 	private double bestDouble = -1.0;
 	
-	public TabuSearch(Graph graph) {
+	public TabuSearch(Graph graph, double percentage) {
 		this.graph = graph;
-		TABUTENURE = Double.valueOf(Math.sqrt(graph.size())).intValue();
+		tenure = Double.valueOf(Math.sqrt((graph.size() * (graph.size() -1)) / 2)).intValue();
+		tenure = (int)((double)tenure * percentage);
 	}
 
-	public double search(int tenure){
-		TABUTENURE = tenure;
+	public int getTABUTENURE() {
+		return tenure;
+	}
+
+	public double search(){
 		Random random = new Random();
 		currentSolution = new ArrayList<Integer>();
 		currentSolution = randomSolution();
@@ -62,22 +65,22 @@ public class TabuSearch {
 					
 					if (nextLength<bestDouble){
 						bestDouble = nextLength;
-						bestSolution = new ArrayList<Integer>(nextSolution); 
 					}
 					
-					if (tabuI.size() > TABUTENURE){
+					if (tabuI.size() > tenure){
 						tabuI.poll();
 						tabuJ.poll();
 					}
 					tabuI.add(i);
 					tabuJ.add(j);
 				}
-				else
+				else{
 					if (nextLength<bestDouble){//best solution ?
 						bestDouble = nextLength;
 						currentLength = nextLength;
 						currentSolution = new ArrayList<Integer>(nextSolution);  
 					}
+				}
 			}
 		}
 		return bestDouble;
