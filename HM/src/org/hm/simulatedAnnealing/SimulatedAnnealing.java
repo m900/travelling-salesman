@@ -11,9 +11,19 @@ public class SimulatedAnnealing implements ISimulatedAnnealing{
 
 	private final Graph graph;
 
-	public SimulatedAnnealing(double startingTemperature, double delta, int numCitites, Graph graph) {
+	private final int tempLength;
+
+	public int getTempLength() {
+		return tempLength;
+	}
+
+	public SimulatedAnnealing(double startingTemperature, double delta, int tempLength, int numCitites, Graph graph) {
+		System.out.println("Starting temp:"+startingTemperature);
+		System.out.println("Temp length:"+tempLength);
+		System.out.println("Delta:"+delta);
 		this.startingTemperature = startingTemperature;
 		this.delta = delta;
+		this.tempLength = tempLength;
 		this.graph = graph;
 		worker = new SimulateAnnealing(this);
 	}

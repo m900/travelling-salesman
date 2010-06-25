@@ -6,6 +6,7 @@ import org.hm.Graph;
 public interface ISimulatedAnnealing {
 	public int getCount();
 	public int getCycles();
+	public int getTempLength();
 	public double getError(int i,int j);
 	public double getStartingTemperature();
 	public double getDelta();

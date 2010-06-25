@@ -65,9 +65,4 @@ public class Backtracking {
 	public void backtrack() {
 		back(0);
 	}
-
-	/*public static void main(String[] args) {
-		Backtracking backtracking = new Backtracking(null);
-		backtracking.backtrack();
-	}*/
 }
