@@ -39,6 +39,8 @@ public class TravellingSalesman {
 
 		simmulatedAnnealing(noPoints);
 		
+		System.out.println("Nu points:"+noPoints);
+		
 		tabuSearch(noPoints);
 
 		System.out.println("---------------------");
@@ -56,16 +58,37 @@ public class TravellingSalesman {
 		System.out.println("Backtracking:        "+backtracking.getShortestPath());
 		return backtracking.getShortestPath();
 	}
+	
 	private static double tabuSearch(int numberOfNodes) {
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
-		TabuSearch tabuSearch = new TabuSearch(theGraph);
+		
+		runTabu(theGraph, 1);
+		
+		
+		runTabu(theGraph, 0.8);
+		
+
+		runTabu(theGraph, 1.2);
+		
+
+		return 0;
+	}
+
+	private static void runTabu(Graph theGraph, double percentageTenure) {
+		TabuSearch tabuSearch = new TabuSearch(theGraph, percentageTenure);
 		Profiler.enter("tabuSearch");
-		System.out.println("Tabu Search   : "+tabuSearch.search(20));
+		double bestPath = Double.MAX_VALUE;
+		for (int i=0;i<10;i++) {
+			double path = tabuSearch.search();
+			if (path < bestPath)
+				bestPath = path;
+		}
+		System.out.println("Tabu Search   : "+bestPath);
+		System.out.println("Tenure:"+tabuSearch.getTABUTENURE());
 		Profiler.leave("tabuSearch");
 		Profiler.print("tabuSearch", "took:");
 		Profiler.reset("tabuSearch");
-		return 0;
 	}
 
 	private static double neighborhoodSearch(int numberOfNodes) {
