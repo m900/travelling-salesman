@@ -23,6 +23,7 @@ public class TabuSearch {
 	}
 
 	public double search(int tenure){
+		TABUTENURE = tenure;
 		Random random = new Random();
 		currentSolution = new ArrayList<Integer>();
 		currentSolution = randomSolution();
