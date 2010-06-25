@@ -11,39 +11,32 @@ import org.hm.tabuSearch.TabuSearch;
 
 public class TravellingSalesman {
 	public static void main(String[] args) {
-		//int noPoints = 8;
+		int noPoints = 8;
 
-		//simulate(noPoints, true);
+		simulate(noPoints, true);
 		
-		//noPoints = 10;
+		noPoints = 10;
 
-		//simulate(noPoints, true);
+		simulate(noPoints, true);
 
-		int noPoints = 50;
+		noPoints = 50;
 
 		simulate(noPoints, false);
 
-		//noPoints = 100;
+		noPoints = 100;
 
-		//simulate(noPoints, false);
+		simulate(noPoints, false);
 	}
 
 	private static void simulate(int noPoints, boolean backtrack){
-		/*System.out.println("No points:"+noPoints);
-
-		if (backtrack){
+		/*if (backtrack){
 			backtracking(noPoints);
 		}
-
 		neighborhoodSearch(noPoints);*/
 
 		simmulatedAnnealing(noPoints);
 		
-		/*System.out.println("Nu points:"+noPoints);
-		
-		tabuSearch(noPoints);*/
-
-		System.out.println("---------------------");
+		//tabuSearch(noPoints);
 	}
 
 	private static double backtracking(int numberOfNodes) {
@@ -122,7 +115,6 @@ public class TravellingSalesman {
 	}
 
 	private static void runAnnealing(double startingTemperature, double delta, int tempLength, int numberOfNodes, Graph theGraph) {
-		System.out.println(startingTemperature+"-"+delta+"-"+tempLength);
 		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(startingTemperature, delta, tempLength, numberOfNodes, theGraph);
 		Profiler.enter("simmulatedAnnealing");
 		simulatedAnnealing.findPath();
@@ -130,7 +122,6 @@ public class TravellingSalesman {
 		Profiler.leave("simmulatedAnnealing");
 		Profiler.print("simmulatedAnnealing", "took:");
 		Profiler.reset("simmulatedAnnealing");
-		System.out.println("Best solution:"+ simulatedAnnealing.getCount());
 	}
 
 	private static Points readPoints(int numberOfNodes) {

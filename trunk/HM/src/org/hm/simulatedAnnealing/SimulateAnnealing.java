@@ -90,7 +90,7 @@ public class SimulateAnnealing {
 
 		while (sameCount < owner.getTempLength()) {
 			
-			System.out.println((System.nanoTime() - time0)/1000.0+"\t"+pathlength);
+			//System.out.println((System.nanoTime() - time0)/1000.0+"\t"+pathlength);
 			
 			// make adjustments to city order(annealing)
 			for (int j2 = 0; j2 < owner.getCount() * owner.getCount(); j2++) {
@@ -125,7 +125,7 @@ public class SimulateAnnealing {
 			cycle++;
 		}
 		// we're done
-		//System.out.println("Simulated anealing:  "+minimallength);
+		System.out.println("->>>>>Simulated anealing:  "+minimallength);
 		return minimallength;
 		}
 		catch (Throwable e){
