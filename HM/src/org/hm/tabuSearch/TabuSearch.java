@@ -17,6 +17,7 @@ public class TabuSearch {
 	private ArrayList<Integer> currentSolution = new ArrayList<Integer>();
 	private ArrayList<Integer> bestSolution = new ArrayList<Integer>();
 	private double bestDouble = -1.0;
+	
 	public TabuSearch(Graph graph) {
 		this.graph = graph;
 		TABUTENURE = Double.valueOf(Math.sqrt(graph.size())).intValue();
