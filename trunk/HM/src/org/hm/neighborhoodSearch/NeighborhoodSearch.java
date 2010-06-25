@@ -44,14 +44,14 @@ public class NeighborhoodSearch{
 		getlength();
 	}
 
-	public double length () {
+	public double length() {
 		return pathLength;
 	}
 
 	/**
 	 * try to find another path with shorter length using removals of points j and inserting i,j,i+1
 	 */
-	private boolean improve (){
+	private boolean improve(){
 		int i,j,h;
 		double d1,d2;
 		double H[] = new double[numberOfNodes];
@@ -83,7 +83,7 @@ public class NeighborhoodSearch{
 	/**
 	 * improve the path locally, using replacements of i,i+1 and j,j+1 with i,j and i+1,j+1
 	 */
-	public boolean improvecross (){
+	public boolean improvecross(){
 		int i,j,h,h1,hj;
 		double d1,d2,d;
 		for (i=0; i<numberOfNodes; i++){
@@ -119,7 +119,7 @@ public class NeighborhoodSearch{
 	/**
 	 * compute the length of the path
 	 */
-	public void getlength (){
+	private void getlength(){
 		pathLength=0;
 		for (int i=0; i < numberOfNodes; i++){
 			pathLength += g.distance(i,To[i]);
@@ -135,13 +135,5 @@ public class NeighborhoodSearch{
 			while (improve());
 		} 
 		while (improvecross());
-	}
-
-	public int[] getFrom() {
-		return From;
-	}
-
-	public int[] getTo() {
-		return To;
 	}
 }
