@@ -30,6 +30,8 @@ public class SimulateAnnealing {
 
 	private ISimulatedAnnealing owner;
 
+	private long time0;
+
 	/**
 	 * Constructor
 	 *
@@ -39,6 +41,7 @@ public class SimulateAnnealing {
 		this.owner = owner;
 		order = new int[owner.getCount()];
 		minimalorder = new int[owner.getCount()];
+		time0 = System.nanoTime();
 	}
 
 	/**
@@ -85,8 +88,10 @@ public class SimulateAnnealing {
 		pathlength = length();
 		minimallength = pathlength;
 
-		while (sameCount<500) {
-			//System.out.println("Cycle=" + cycle + ",Length=" + minimallength + ",Temp=" + temperature );
+		while (sameCount < owner.getTempLength()) {
+			
+			System.out.println((System.nanoTime() - time0)/1000.0+"\t"+pathlength);
+			
 			// make adjustments to city order(annealing)
 			for (int j2 = 0; j2 < owner.getCount() * owner.getCount(); j2++) {
 				int i1 = (int)Math.floor((double)owner.getCount() * Math.random());

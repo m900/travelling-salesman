@@ -11,37 +11,37 @@ import org.hm.tabuSearch.TabuSearch;
 
 public class TravellingSalesman {
 	public static void main(String[] args) {
-		int noPoints = 8;
+		//int noPoints = 8;
 
-		simulate(noPoints, true);
+		//simulate(noPoints, true);
 		
-		noPoints = 10;
+		//noPoints = 10;
 
-		simulate(noPoints, true);
+		//simulate(noPoints, true);
 
-		noPoints = 50;
-
-		simulate(noPoints, false);
-
-		noPoints = 100;
+		int noPoints = 50;
 
 		simulate(noPoints, false);
+
+		//noPoints = 100;
+
+		//simulate(noPoints, false);
 	}
 
 	private static void simulate(int noPoints, boolean backtrack){
-		System.out.println("No points:"+noPoints);
+		/*System.out.println("No points:"+noPoints);
 
 		if (backtrack){
 			backtracking(noPoints);
 		}
 
-		neighborhoodSearch(noPoints);
+		neighborhoodSearch(noPoints);*/
 
 		simmulatedAnnealing(noPoints);
 		
-		System.out.println("Nu points:"+noPoints);
+		/*System.out.println("Nu points:"+noPoints);
 		
-		tabuSearch(noPoints);
+		tabuSearch(noPoints);*/
 
 		System.out.println("---------------------");
 	}
@@ -109,14 +109,28 @@ public class TravellingSalesman {
 		
 		Points points = readPoints(numberOfNodes);
 		Graph theGraph = new PlaneGraph(points);
-		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(15000, 0.99, numberOfNodes, theGraph);
+		//orange
+		//temperature = 150, temperature length = 100 and cooling ratio = 0.9
+		runAnnealing(150, 0.9, 100, numberOfNodes, theGraph);
+		//temperature = 1500, temperature length = 500 and cooling ratio = 0.95
+		runAnnealing(1500, 0.95, 500, numberOfNodes, theGraph);
+		//initial temperature = 15000, temperature length = 1500, cooling ratio = 0.99
+		// verde
+		runAnnealing(15000, 0.99, 1500, numberOfNodes, theGraph);
+		
+		return 0;
+	}
+
+	private static void runAnnealing(double startingTemperature, double delta, int tempLength, int numberOfNodes, Graph theGraph) {
+		System.out.println(startingTemperature+"-"+delta+"-"+tempLength);
+		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(startingTemperature, delta, tempLength, numberOfNodes, theGraph);
 		Profiler.enter("simmulatedAnnealing");
 		simulatedAnnealing.findPath();
 		int[] order = simulatedAnnealing.getMinimalOrder();
 		Profiler.leave("simmulatedAnnealing");
 		Profiler.print("simmulatedAnnealing", "took:");
 		Profiler.reset("simmulatedAnnealing");
-		return simulatedAnnealing.getCount();
+		System.out.println("Best solution:"+ simulatedAnnealing.getCount());
 	}
 
 	private static Points readPoints(int numberOfNodes) {
